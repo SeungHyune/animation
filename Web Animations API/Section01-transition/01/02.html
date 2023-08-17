@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transition</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background-color:green;
+            transition:
+                transform 1s cubic-bezier(0.38,-0.57,0.63,1.54);
+        }
+        .box-effect{
+            background-color:greenyellow;
+            transform:translateX(200px);
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <p class="message"></p>
+    <script>
+        // transitionstart
+        // transitionend
+        // transitionrun
+        // transitioncancel
+
+        const box = document.querySelector('.box');
+        const message = document.querySelector('.message');
+        let flag = false;
+
+        box.addEventListener('click', ()=>{
+            if(!flag){
+                box.classList.toggle('box-effect');
+            }
+            flag = true;
+        });
+
+        box.addEventListener('transitionstart', ()=>{
+            message.innerText = 'START';
+            console.log('transitionstart : START');
+        });
+
+        box.addEventListener('transitionend', ()=>{
+            message.innerText = 'END';
+            flag = false;
+            console.log('transitionend : END');
+        });
+
+        box.addEventListener('transitionrun', ()=>{
+            console.log('transitionrun : RUN');
+        });
+
+        box.addEventListener('transitioncancel', ()=>{
+            console.log('transitioncancel : CANCEL');
+        });
+    </script>
+</body>
+</html>
