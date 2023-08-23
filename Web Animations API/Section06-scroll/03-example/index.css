@@ -1,0 +1,84 @@
+@charset 'utf-8';
+
+html, body, h1, h2, h3, h4, h5, h6, p, blockquote, code, img, dl, dt, dd, ol, ul, li, fieldset, legend, caption { margin: 0; padding: 0; border: 0; }
+div, span, article, section, header, footer, p, ul, li, fieldset, legend, label, a, nav, h1, h2, h3 { box-sizing: border-box; }
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; }
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul, li { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { max-width: 100%; height: auto; }
+
+html {
+	font-size: 20px;
+	font-family: Roboto;
+	line-height: 1.6;
+}
+
+body {
+    background:skyblue;
+}
+.wrap{
+    contain:paint;
+}
+.rocket-scroll-timeline{
+	position:relative;
+	margin:150px 0;
+	height:calc(4315px + 2000px - 100vh);;
+    
+}
+.track {
+	position:absolute;
+	left:50vw;
+	top:0;
+	width:800px;
+	transform:translateX(-50%);
+}
+
+.rocket-path {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100px;
+    transform: rotate(51.5deg);
+    offset-path:path("M400,0c0,0,25.453,238.182-92.728,356.364 s-200,145.455-168.181,268.182s259.091,181.818,363.636,140.909s-299.999-409.091-327.272,81.818s281.819,427.273,318.182,427.273 s331.817,90.909,204.545,304.545s-395.455,277.272-463.636,195.455S739.091,1538.182,680,1897.272s-120.73,359.092-249.002,395.455 c-128.271,36.363-55.178,265.147-157.188,313.152s-117.012,216.021-111.011,333.033s486.049-36.003,465.047,222.022 s-48.004,333.034-141.014,396.04S391.176,3965.977,400,4000");
+    offset-distance:0%;
+}
+.rocket-path[data-location='up']{
+    offset-rotate:auto 178deg;
+}
+.map-path {
+    fill : none;
+    stroke:white;
+    stroke-dasharray: 14px;
+    stroke-width:5px;
+}
+
+/* gallery */
+.gallery-timeline {
+	position: absolute;
+	left: 3%;
+	top: 1420px;
+	width: 94%;
+	height: 2000px;
+}
+.gallery{
+    position:sticky;
+    top:0;
+    width:350vw;
+    height:100vh;
+    align-items:center;
+    max-width:3500px;
+    display:flex;
+    z-index:1;
+    margin-top: -650px;
+}
+.gallery-item{
+    width:70vw;
+    flex-shrink:0;
+    max-width:700px;
+}
+.gallery-item figure img{
+    border-radius:50%;
+    width:70%;
+}
