@@ -3,6 +3,7 @@
     let yOffset = 0; // window.pageYOffset 대신 쓸 변수
     let prevScrollHeight = 0; // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
     let currentScene = 0; // 현재 활성화된(눈 앞에 보고있는) 씬(scroll-section)
+    let enterNewScene = false;
 
     const sceneInfo = [
         {
@@ -18,7 +19,8 @@
                 messageD: document.querySelector('#scroll-section-0 .main-message.d'),
             },
             values: {
-                messageA_opacity: [0,1]
+                messageA_opacity: [0,1, {start:0.1, end:0.2}],
+                messageB_opacity: [0,1, {start:0.3, end:0.4}],
             }
         },
         {
@@ -52,9 +54,24 @@
 
     function calcValues(values, currentYOffset){
         let rv;
-        let scrollRatio = currentYOffset / sceneInfo[currentScene].scrollHeight;
+        const scrollHeight = sceneInfo[currentScene].scrollHeight;
+        let scrollRatio = currentYOffset / scrollHeight;
 
-        rv = scrollRatio * (values[1] - values[0] + values[0])
+        if(values.length === 3) {
+            const partScrollStart = values[2].start * scrollHeight;
+            const partScrollEnd = values[2].end * scrollHeight;
+            const partScrollHeight = partScrollEnd - partScrollStart;
+
+            if(currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
+                rv = (currentYoffset - partScrollStart) / partScrollHeight * (values[1] - values[0]) + values[0];
+            } else if(currentYOffset < partScrollStart) {
+                rv = values[0];
+            } else if(currentYOffset > partScrollEnd) {
+                rv = values[1];
+            }
+        } else {
+            rv = scrollRatio * (values[1] - values[0] + values[0])
+        }
         return rv;
     }
 
@@ -62,12 +79,20 @@
         const objs = sceneInfo[currentScene].objs;
         const values = sceneInfo[currentScene].values;
         const currentYOffset = yOffset - prevScrollHeight;
+        const scrollHeight = sceneInfo[currentScene].scrollHeight;
+        const scrollRatio = (yOffset - prevScrollHeight) / scrollHeight;
 
         switch(currentScene){
             case 0:
                 // console.log('0 play');
                 let messageA_opacity_in = calcValues(values.messageA_opacity, currentYOffset);
-                objs.messageA.style.opacity = messageA_opacity_in;
+                let messageA_opacity_out = calcValues(values.messageA_opacity, currentYOffset);
+                
+                if(scrollRatio <= 0.22) {
+                    objs.messageA.style.opacity = messageA_opacity_in;
+                } else {
+                    objs.messageA.style.opacity = messageA_opacity_out;
+                }
                 break;
             case 1:
                 console.log('1 play');
@@ -82,21 +107,25 @@
     }
 
     function scrollLoop(){
+        enterNewScene = false;
         prevScrollHeight = 0;
         for(let i=0;i<currentScene;i++){
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
 
         if(yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight){
+            enterNewScene = true;
             currentScene++;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
         if(yOffset < prevScrollHeight){
+            enterNewScene = true;
             if(currentScene === 0) return;
             currentScene--;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
 
+        if(enterNewScene) return;
         playAnimation();
     }
 
