@@ -169,8 +169,9 @@ a {
 #show-scene-3 #scroll-section-3 .sticky-elem {
     display: block;
 }
-.image-blend-canvas {
-    background: blue;
+.image-blend-canvas.sticky {
+    position: fixed;
+    top: 0;
 }
 #scroll-section-3 {
     display: flex;
