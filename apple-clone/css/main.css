@@ -48,6 +48,12 @@ a {
     border-bottom:1px solid #ddd;
     z-index: 11;
 }
+.local-nav-sticky .local-nav {
+    position: fixed;
+    top: 0;
+    background: rgba(255,255,255,0);
+    backdrop-filter: saturate(180%) blur(15px);
+}
 .local-nav-links .product-name {
     margin-right: auto;
     font-size:1.4rem;
@@ -135,7 +141,7 @@ a {
 }
 .canvas-caption {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: -24rem auto 0;
     padding: 0 1rem;
     font-size: 1.2rem;
     color: #888;
@@ -172,6 +178,7 @@ a {
 .image-blend-canvas.sticky {
     position: fixed;
     top: 0;
+    z-index: 10;
 }
 #scroll-section-3 {
     display: flex;
@@ -187,6 +194,7 @@ a {
         font-size: 4vw;
     }
     .description {
+        padding: 0;
         font-size: 2rem;
     }
     .description strong {
@@ -209,9 +217,13 @@ a {
         left: 55%;
     }
     .mid-message {
+        width: 1000px;
+        padding: 0;
         font-size: 4vw;
     }
     .canvas-caption {
+        margin-top: -8rem;
+        padding: 0;
         font-size: 2rem;
     }
 }
