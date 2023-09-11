@@ -109,8 +109,8 @@
                 canvas: document.querySelector('.image-blend-canvas'),
                 context: document.querySelector('.image-blend-canvas').getContext('2d'),
                 imagePath: [
-                    './images/blend-image-1.jpg',
-                    './images/blend-image-2.jpg'
+                    '../images/blend-image-1.jpg',
+                    '../images/blend-image-2.jpg'
                 ],
                 images: []
             },
@@ -492,31 +492,40 @@
         }
     }
 
-    window.addEventListener('scroll', () => {
-        yOffset = window.pageYOffset;
-        scrollLoop();
-        checkMenu();
-
-        if(!rafState) {
-            raf = requestAnimationFrame(loop);
-            rafState = true;
-        }
-    });
+    
 
     window.addEventListener('load', () => {
         document.body.classList.remove('before-load');
         setLayout();
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+        window.addEventListener('scroll', () => {
+            yOffset = window.pageYOffset;
+            scrollLoop();
+            checkMenu();
+    
+            if(!rafState) {
+                raf = requestAnimationFrame(loop);
+                rafState = true;
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 900) {
+                setLayout();
+                sceneInfo[3].values.rectStartY = 0;
+            }
+            
+        });
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setLayout, 500);
+        });
+
+        document.querySelector('.loading').addEventListener('transitionend', (e) => {
+            document.body.removeChild(e.currentTarget);
+        });
     });
-    window.addEventListener('resize', () => {
-        if(window.innerWidth > 900) {
-            setLayout();
-        }
-        sceneInfo[3].values.rectStartY = 0;
-    });
-    window.addEventListener('orientationchange', setLayout);
-    document.querySelector('.loading').addEventListener('transitionend', (e) => {
-        document.body.removeChild(e.currentTarget);
-    });
+    
     setCanvasImages();
+
 })();

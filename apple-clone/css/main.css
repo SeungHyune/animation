@@ -17,7 +17,13 @@ a {
     color:rgb(29,29,31);
     text-decoration:none;
 }
-
+body.before-load {
+    overflow: hidden;
+}
+.container {
+    /* iPhone 가로 스크롤 방지 */
+    overflow-x: hidden;
+}
 .global-nav {
     position:absolute;
     left:0;
@@ -52,6 +58,10 @@ a {
     position: fixed;
     top: 0;
     background: rgba(255,255,255,0);
+    /* for iPhone */
+    -webkit-backdrop-filter: saturate(180%) blur(15px);
+    -moz-backdrop-filter: saturate(180%) blur(15px);
+    -o-backdrop-filter: saturate(180%) blur(15px);
     backdrop-filter: saturate(180%) blur(15px);
 }
 .local-nav-links .product-name {
@@ -174,6 +184,7 @@ a {
 #show-scene-2 #scroll-section-2 .sticky-elem,
 #show-scene-3 #scroll-section-3 .sticky-elem {
     display: block;
+    will-change: transform, opacity;
 }
 .image-blend-canvas.sticky {
     position: fixed;
