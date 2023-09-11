@@ -528,4 +528,5 @@
     
     setCanvasImages();
 
+    document.body.style.backgroundImage = `url('../images/blend-image-1.jpg')`;
 })();
