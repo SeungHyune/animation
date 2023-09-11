@@ -109,8 +109,8 @@
                 canvas: document.querySelector('.image-blend-canvas'),
                 context: document.querySelector('.image-blend-canvas').getContext('2d'),
                 imagePath: [
-                    '../images/blend-image-1.jpg',
-                    '../images/blend-image-2.jpg'
+                    '../apple-clone/images/blend-image-1.jpg',
+                    '../apple-clone/images/blend-image-2.jpg'
                 ],
                 images: []
             },
@@ -130,14 +130,14 @@
         let imgElem;
         for(let i=0;i<sceneInfo[0].values.videoImageCount;i++){
             imgElem = new Image();
-            imgElem.src =`../video/001/IMG_${6726+i}.JPG`;
+            imgElem.src =`../apple-clone/video/001/IMG_${6726+i}.JPG`;
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
 
         let imgElem2;
         for(let i=0;i<sceneInfo[2].values.videoImageCount;i++){
             imgElem2 = new Image();
-            imgElem2.src =`../video/002/IMG_${7027+i}.JPG`;
+            imgElem2.src =`../apple-clone/video/002/IMG_${7027+i}.JPG`;
             sceneInfo[2].objs.videoImages.push(imgElem2);
         }
 
@@ -528,5 +528,4 @@
     
     setCanvasImages();
 
-    document.body.style.backgroundImage = `url('../images/blend-image-1.jpg')`;
 })();
